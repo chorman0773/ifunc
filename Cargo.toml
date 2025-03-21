@@ -1,0 +1,22 @@
+[package]
+name = "ifunc"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+ifunc-attribute = { path = "ifunc-attribute" }
+
+
+[workspace]
+members = ["ifunc-attribute"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = [
+    "cfg(unsafe_ifunc_allow_target)",
+    "cfg(unsafe_ifunc_binary_format, values(\"mach-o\", \"elf\"))",
+    "cfg(target_os, values(\"lilium\"))",
+] }
