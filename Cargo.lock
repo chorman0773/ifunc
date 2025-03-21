@@ -36,7 +36,7 @@ dependencies = [
 [[package]]
 name = "proc_macro-deterministic-rand"
 version = "0.1.0"
-source = "git+https://github.com/chorman0773/proc_macro-deterministic-rand#2846b57e08c5b7499288fbccfd51ca50c2d14311"
+source = "git+https://github.com/chorman0773/proc_macro-deterministic-rand#993611d4f5f3363730a663ce1507625abc67ead8"
 dependencies = [
  "lccc-siphash",
  "proc-macro2",

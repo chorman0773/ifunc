@@ -71,6 +71,8 @@
 //!
 //! The resolver is an unnameable function with signature `extern "C" fn () -> F`, where `F` is the fn-pointer type corresponding to the signature of the target function.
 //!
+//! If the resolver (not the target function) panics, the process aborts. If you intend calls to the target function to immediately panic, instead resolve to a function that unconditionally panics.
+//!
 //! ## Why to use it
 //!
 //! The main reason to use this is if you want to test properties of the system before deciding what function to call.
@@ -255,5 +257,15 @@ mod test {
     #[test]
     fn foo_test() {
         assert_eq!(foo(), "foo")
+    }
+
+    #[indirect_func]
+    fn bar() -> i32 {
+        || 0
+    }
+
+    #[test]
+    fn bar_test() {
+        assert_eq!(bar(), 0)
     }
 }

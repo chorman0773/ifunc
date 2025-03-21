@@ -1,7 +1,7 @@
 #![feature(try_find, proc_macro_expand)]
 
 use proc_macro::TokenStream;
-use proc_macro_deterministic_rand::RandomSource;
+use proc_macro_deterministic_rand::{RandomSource, keys_from_cargo};
 use proc_macro2::{Span, TokenStream as TokenStream2};
 use quote::ToTokens;
 use syn::{
@@ -297,7 +297,7 @@ pub fn indirect_func(_input: TokenStream, item: TokenStream) -> TokenStream {
 
     let key_span = item.span();
 
-    let rand = RandomSource::with_key_span(key_span);
+    let rand = RandomSource::with_key_span_and_seed(key_span, keys_from_cargo!("indirect_func"));
 
     let res = match parse_indirect_func(item, rand) {
         Ok(item) => item,
